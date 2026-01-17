@@ -46,6 +46,7 @@ PRD 요구사항과 구현 상태를 추적하는 매트릭스
 | REQ-3.5 | DOM/레이아웃 영향 없음 | ✅ | 독립 컨테이너 | 레이아웃 시프트 테스트 | 없음 |
 | REQ-3.6 | color 표시 (hex 형식) | ✅ | content.js:createBadge, rgbToHex | 컬러 정확도 (rgb→hex 변환) | 없음 |
 | REQ-3.7 | color 미리보기 박스 표시 | ✅ | content.js:createBadge, styles.css | 색상 박스 시각적 확인 | 없음 |
+| REQ-3.8 | 텍스트 호버 시 배지 최상단 표시 | ✅ | content.js:setupHoverListener, styles.css:lfqa-badge-highlight | 가려진 배지 호버 테스트 | hover 리스너 cleanup 필요 |
 
 ### REQ-4: Auto Refresh (PRD 6.4)
 

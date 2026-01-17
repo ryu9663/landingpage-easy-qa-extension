@@ -72,6 +72,12 @@
 ├── TEST-3.12: pointer-events 통과
 ├── TEST-3.13: 페이지 레이아웃 무영향
 └── TEST-3.14: z-index 충돌 없음
+
+[Badge Hover]
+├── TEST-3.15: 텍스트 호버 → 해당 배지 최상단 표시
+├── TEST-3.16: 가려진 배지 → 호버 시 노출
+├── TEST-3.17: 호버 해제 → 원래 z-index 복원
+└── TEST-3.18: 배지 pointer-events:none 유지 (호버 중에도)
 ```
 
 ### Suite 4: Auto Refresh (Run if event code changed)
@@ -120,7 +126,8 @@
 ├── TEST-6.5: OFF → scroll 리스너 해제
 ├── TEST-6.6: OFF → resize 리스너 해제
 ├── TEST-6.7: OFF → MutationObserver 해제
-└── TEST-6.8: 메모리 누수 없음
+├── TEST-6.8: 메모리 누수 없음
+└── TEST-6.9: OFF → hover 리스너 해제
 ```
 
 ## Execution Strategy
@@ -146,6 +153,7 @@ const testMap = {
   'content.js:toggle': ['Suite 1', 'Suite 6'],
   'content.js:detect': ['Suite 2'],
   'content.js:render': ['Suite 3'],
+  'content.js:hover': ['Suite 3', 'Suite 6'],
   'content.js:events': ['Suite 4'],
   'content.js:performance': ['Suite 5'],
   'content.js:cleanup': ['Suite 6'],
