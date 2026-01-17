@@ -44,6 +44,7 @@ PRD 요구사항과 구현 상태를 추적하는 매트릭스
 | REQ-3.3 | 텍스트 좌상단 위치 | ✅ | content.js:createBadge | 위치 정확도 | 없음 |
 | REQ-3.4 | pointer-events: none | ✅ | styles.css | 클릭 통과 테스트 | 없음 |
 | REQ-3.5 | DOM/레이아웃 영향 없음 | ✅ | 독립 컨테이너 | 레이아웃 시프트 테스트 | 없음 |
+| REQ-3.6 | color 표시 (hex 형식) | ⬜ | content.js:createBadge | 컬러 정확도 (rgb→hex 변환) | 없음 |
 
 ### REQ-4: Auto Refresh (PRD 6.4)
 

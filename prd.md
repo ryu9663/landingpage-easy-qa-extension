@@ -1,7 +1,7 @@
 # PRD: Landing Font QA (Chrome Extension)
 
 ## 1. 목적
-랜딩페이지 QA 과정에서 **현재 화면(뷰포트)에 실제로 보이는 텍스트들의 `font-size`, `font-weight`를 즉시 확인**할 수 있도록, 텍스트 요소 위에 말풍선(배지) 형태로 표시하는 **최소 기능 크롬 익스텐션**을 만든다.
+랜딩페이지 QA 과정에서 **현재 화면(뷰포트)에 실제로 보이는 텍스트들의 `font-size`, `font-weight`, `color`를 즉시 확인**할 수 있도록, 텍스트 요소 위에 말풍선(배지) 형태로 표시하는 **최소 기능 크롬 익스텐션**을 만든다.
 
 ## 2. 핵심 가치
 - 디자이너/QA가 개발자 도구 없이도 폰트 스펙을 빠르게 확인
@@ -32,7 +32,7 @@
   - `opacity: 0`
 
 ### 제외 (v0)
-- 색상/라인하이트/폰트패밀리 등 추가 스펙 표기
+- 라인하이트/폰트패밀리 등 추가 스펙 표기
 - 클릭/선택/인스펙터 모드(hover만 표시 등)
 - 리포트 저장/내보내기
 - 페이지별 룰/프리셋 관리
@@ -64,7 +64,7 @@
 > 주의: `display:hidden`은 유효한 CSS가 아니므로 `visibility:hidden`으로 간주한다.
 
 ### 6.3 배지(말풍선) 표시
-- 표시 정보: `font-size` / `font-weight`
+- 표시 정보: `font-size` / `font-weight` / `color`
 - 위치: 해당 텍스트 요소의 화면 좌상단 근처(겹침 최소화는 v0에서 “간단히” 처리)
 - 배지는 페이지 클릭/스크롤 상호작용을 방해하지 않음(pointer-events 없음)
 - 오버레이는 페이지 DOM/레이아웃에 영향 주지 않음(고정 레이어)
@@ -112,7 +112,7 @@
   - v0는 미지원(명시)
 
 ## 9. 수용 기준 (Acceptance Criteria)
-- 오버레이 ON 시, 뷰포트 내 보이는 텍스트 요소 위에 `font-size / font-weight`가 표시된다.
+- 오버레이 ON 시, 뷰포트 내 보이는 텍스트 요소 위에 `font-size / font-weight / color`가 표시된다.
 - `display:none` / `visibility:hidden` / `opacity:0`인 텍스트는 표시되지 않는다.
 - 스크롤/리사이즈 후 배지가 현재 뷰포트 기준으로 갱신된다.
 - 오버레이는 클릭/스크롤 등 사용자 상호작용을 방해하지 않는다.
@@ -122,6 +122,7 @@
 ## 10. QA 체크리스트(최소)
 - 다양한 폰트 사이즈(px/rem/em)에서 표시값 확인 (computed style 결과)
 - font-weight가 400/700뿐 아니라 500/600 등에서도 정상 표시
+- color가 hex 형식으로 정상 표시 (rgb → hex 변환)
 - 숨김 케이스: display none / visibility hidden / opacity 0
 - 스크롤이 긴 페이지에서 갱신 정상
 - fixed/sticky 헤더 아래 텍스트에서 배지 위치 확인

@@ -139,9 +139,59 @@
     </div>
   </div>
 
-  <!-- Section 3: Hidden Elements (Should NOT show badges) -->
+  <!-- Section 3: Font Colors -->
   <div class="section">
-    <div class="section-title">3. Hidden Elements Tests (Badges should NOT appear)</div>
+    <div class="section-title">3. Font Color Tests (rgb → hex conversion)</div>
+
+    <div class="test-item">
+      <div class="test-label">Black (#000000)</div>
+      <div style="font-size: 16px; color: #000000;">Black text - #000000</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">White (#FFFFFF) on dark bg</div>
+      <div style="font-size: 16px; color: #FFFFFF; background: #333; padding: 5px;">White text - #FFFFFF</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">Red (#FF0000)</div>
+      <div style="font-size: 16px; color: #FF0000;">Red text - #FF0000</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">Green (#00FF00)</div>
+      <div style="font-size: 16px; color: #00FF00;">Green text - #00FF00</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">Blue (#0000FF)</div>
+      <div style="font-size: 16px; color: #0000FF;">Blue text - #0000FF</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">Custom color (#007BFF)</div>
+      <div style="font-size: 16px; color: #007BFF;">Primary blue - #007BFF</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">RGB notation (rgb(128, 0, 128) → #800080)</div>
+      <div style="font-size: 16px; color: rgb(128, 0, 128);">Purple via RGB - should show #800080</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">RGBA with alpha (rgba(255, 165, 0, 0.8))</div>
+      <div style="font-size: 16px; color: rgba(255, 165, 0, 0.8);">Orange with alpha - rgba handling</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">Named color (tomato → #FF6347)</div>
+      <div style="font-size: 16px; color: tomato;">Tomato named color - should show #FF6347</div>
+    </div>
+  </div>
+
+  <!-- Section 4: Hidden Elements (Should NOT show badges) -->
+  <div class="section">
+    <div class="section-title">4. Hidden Elements Tests (Badges should NOT appear)</div>
 
     <div class="test-item">
       <div class="test-label">display: none</div>
@@ -177,7 +227,7 @@
 
   <!-- Section 5: Nested Text (Deduplication test) -->
   <div class="section">
-    <div class="section-title">4. Nested Text Tests (Deduplication)</div>
+    <div class="section-title">5. Nested Text Tests (Deduplication)</div>
 
     <div class="test-item">
       <div class="test-label">Parent with text, child with text</div>
@@ -205,7 +255,7 @@
 
   <!-- Section 6: Zero Size Elements (Should NOT show badges) -->
   <div class="section">
-    <div class="section-title">5. Zero Size Elements Tests (No badges expected)</div>
+    <div class="section-title">6. Zero Size Elements Tests (No badges expected)</div>
 
     <div class="test-item">
       <div class="test-label">width: 0</div>
@@ -222,7 +272,7 @@
 
   <!-- Section 7: iframe Tests -->
   <div class="section">
-    <div class="section-title">6. iframe Tests</div>
+    <div class="section-title">7. iframe Tests</div>
 
     <div class="test-item">
       <div class="test-label">Cross-origin iframe (Should NOT show badges inside)</div>
@@ -233,7 +283,7 @@
 
   <!-- Section 8: Long Scroll Content -->
   <div class="section">
-    <div class="section-title">7. Scroll Test - Long Content</div>
+    <div class="section-title">8. Scroll Test - Long Content</div>
     <p style="font-size: 14px; margin-bottom: 10px;">Scroll down to see more text elements. Badges should update after scrolling (1s debounce).</p>
 
     <div style="height: 500px; background: linear-gradient(to bottom, #f0f0f0, #e0e0e0); padding: 20px;">
@@ -245,7 +295,7 @@
 
   <!-- Section 9: Performance Test -->
   <div class="section">
-    <div class="section-title">8. Performance Test - Many Elements</div>
+    <div class="section-title">9. Performance Test - Many Elements</div>
     <p style="font-size: 14px; margin-bottom: 10px;">Multiple text elements to test performance (max 800 badges limit).</p>
 
     <div id="performance-test" style="display: flex; flex-wrap: wrap; gap: 5px;">
