@@ -91,6 +91,99 @@
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
   }
 
+  // Parse pixel value, returns 0 if not a valid pixel value
+  function parsePxValue(value) {
+    if (!value || value === 'auto' || value === 'none') return 0;
+    const num = parseFloat(value);
+    return isNaN(num) ? 0 : Math.round(num);
+  }
+
+  // Format box model values (margin/padding), returns empty string if all zeros
+  function formatBoxModel(prefix, top, right, bottom, left) {
+    const t = parsePxValue(top);
+    const r = parsePxValue(right);
+    const b = parsePxValue(bottom);
+    const l = parsePxValue(left);
+
+    // Skip if all zeros
+    if (t === 0 && r === 0 && b === 0 && l === 0) return '';
+
+    const parts = [];
+    if (t !== 0) parts.push(`${prefix}t:${t}`);
+    if (r !== 0) parts.push(`${prefix}r:${r}`);
+    if (b !== 0) parts.push(`${prefix}b:${b}`);
+    if (l !== 0) parts.push(`${prefix}l:${l}`);
+
+    return parts.join(' ');
+  }
+
+  // Format size info, skips auto values
+  function formatSize(width, height) {
+    const parts = [];
+
+    // Skip auto, inherit, and percentage values
+    if (width && width !== 'auto' && !width.includes('%')) {
+      const w = parsePxValue(width);
+      if (w > 0) parts.push(`w:${w}px`);
+    }
+
+    if (height && height !== 'auto' && !height.includes('%')) {
+      const h = parsePxValue(height);
+      if (h > 0) parts.push(`h:${h}px`);
+    }
+
+    return parts.join(' ');
+  }
+
+  // Format layout info - returns object with separate margin, padding, size
+  function formatLayoutInfo(style) {
+    // Margin
+    const margin = formatBoxModel('m', style.marginTop, style.marginRight, style.marginBottom, style.marginLeft);
+
+    // Padding
+    const padding = formatBoxModel('p', style.paddingTop, style.paddingRight, style.paddingBottom, style.paddingLeft);
+
+    // Size
+    const size = formatSize(style.width, style.height);
+
+    return { margin, padding, size };
+  }
+
+  // Format position info (only for positioned elements)
+  function formatPositionInfo(style) {
+    const pos = style.position;
+    // Skip static positioning
+    if (!pos || pos === 'static') return '';
+
+    const parts = [`pos:${pos}`];
+
+    // Only add offset values if they're not auto
+    const top = style.top;
+    const right = style.right;
+    const bottom = style.bottom;
+    const left = style.left;
+
+    if (top && top !== 'auto') {
+      const t = parsePxValue(top);
+      if (t !== 0) parts.push(`top:${t}`);
+    }
+    if (right && right !== 'auto') {
+      const r = parsePxValue(right);
+      if (r !== 0) parts.push(`right:${r}`);
+    }
+    if (bottom && bottom !== 'auto') {
+      const b = parsePxValue(bottom);
+      if (b !== 0) parts.push(`bottom:${b}`);
+    }
+    if (left && left !== 'auto') {
+      const l = parsePxValue(left);
+      if (l !== 0) parts.push(`left:${l}`);
+    }
+
+    // Only return if we have more than just the position type
+    return parts.length > 1 ? parts.join(' ') : '';
+  }
+
   // Find all visible text elements
   function findTextElements() {
     const elements = [];
@@ -145,17 +238,53 @@
     const badge = document.createElement('div');
     badge.className = 'lfqa-badge';
 
-    // Create text content
+    // Create font info row
+    const fontRow = document.createElement('div');
+    fontRow.className = 'lfqa-badge-font';
+
     const textSpan = document.createElement('span');
     textSpan.textContent = `${fontSize}px / ${fontWeight} / ${color}`;
 
-    // Create color preview box
     const colorBox = document.createElement('span');
     colorBox.className = 'lfqa-color-box';
     colorBox.style.backgroundColor = color;
 
-    badge.appendChild(textSpan);
-    badge.appendChild(colorBox);
+    fontRow.appendChild(textSpan);
+    fontRow.appendChild(colorBox);
+    badge.appendChild(fontRow);
+
+    // Create layout info rows (separate rows for margin, padding, size)
+    const layoutInfo = formatLayoutInfo(style);
+
+    if (layoutInfo.margin) {
+      const marginRow = document.createElement('div');
+      marginRow.className = 'lfqa-badge-margin';
+      marginRow.textContent = layoutInfo.margin;
+      badge.appendChild(marginRow);
+    }
+
+    if (layoutInfo.padding) {
+      const paddingRow = document.createElement('div');
+      paddingRow.className = 'lfqa-badge-padding';
+      paddingRow.textContent = layoutInfo.padding;
+      badge.appendChild(paddingRow);
+    }
+
+    if (layoutInfo.size) {
+      const sizeRow = document.createElement('div');
+      sizeRow.className = 'lfqa-badge-size';
+      sizeRow.textContent = layoutInfo.size;
+      badge.appendChild(sizeRow);
+    }
+
+    // Create position info row (only for positioned elements)
+    const positionInfo = formatPositionInfo(style);
+    if (positionInfo) {
+      const positionRow = document.createElement('div');
+      positionRow.className = 'lfqa-badge-position';
+      positionRow.textContent = positionInfo;
+      badge.appendChild(positionRow);
+    }
 
     // Position at top-left of element
     badge.style.left = `${rect.left + window.scrollX}px`;
