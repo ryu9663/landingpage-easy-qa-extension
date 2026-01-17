@@ -1,5 +1,8 @@
 # Landing Font QA Extension - Todo List
 
+> **Note**: 이 파일은 **개발 작업 순서**를 정의합니다.
+> 요구사항 충족 상태 추적은 `.claude/requirements-matrix.md`를 참조하세요.
+
 ## Phase 1: 초기 세팅
 
 ### 프로젝트 구조 설정

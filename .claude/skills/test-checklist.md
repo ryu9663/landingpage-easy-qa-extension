@@ -1,10 +1,10 @@
 # Skill: Test Checklist
 
-Run through QA checklist items from todolist.md.
+Extension 기능 테스트용 QA 체크리스트
 
 ## Trigger
 
-When user wants to test the extension functionality.
+사용자가 확장 기능을 테스트하고자 할 때 (`/test` 명령 실행 시)
 
 ## Test Categories
 
@@ -22,7 +22,7 @@ When user wants to test the extension functionality.
 - [ ] Empty/whitespace-only text excluded
 - [ ] Off-viewport text excluded
 
-### 3. Badge Display Tests
+### 3. Badge Rendering Tests
 - [ ] Shows font-size in px
 - [ ] Shows font-weight correctly
 - [ ] Badge positioned near text element
@@ -42,6 +42,7 @@ When user wants to test the extension functionality.
 - [ ] OFF removes all overlay elements
 - [ ] No residual styles on page
 - [ ] Event listeners properly removed
+- [ ] MutationObserver disconnected
 
 ## Test Sites
 
@@ -58,10 +59,10 @@ Test Results
 ============
 Toggle: 4/4 passed
 Detection: 6/6 passed
-Display: 4/4 passed
+Render: 4/4 passed
 Refresh: 3/3 passed
 Performance: 3/3 passed
-Cleanup: 3/3 passed
+Cleanup: 4/4 passed
 
-Overall: 23/23 PASSED
+Overall: 24/24 PASSED
 ```

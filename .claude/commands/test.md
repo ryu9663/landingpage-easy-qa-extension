@@ -12,6 +12,7 @@ Interactive test checklist based on the QA requirements in todolist.md.
 /test
 /test toggle      # Test only toggle functionality
 /test detection   # Test only text detection
+/test render      # Test only badge rendering
 /test performance # Test only performance
 ```
 
@@ -27,7 +28,7 @@ Interactive test checklist based on the QA requirements in todolist.md.
 - Hidden element exclusion (display, visibility, opacity)
 - Viewport boundary handling
 
-### display
+### render
 - Font-size display accuracy
 - Font-weight display accuracy
 - Badge positioning
@@ -68,5 +69,5 @@ Running QA Tests: All Categories
 
 ...
 
-Summary: 23/23 tests passed
+Summary: 24/24 tests passed
 ```
