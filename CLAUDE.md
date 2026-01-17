@@ -57,8 +57,8 @@ Chrome Extension for QA teams to quickly verify font-size, font-weight, and colo
 - `pointer-events: none` on overlay
 
 ### Badge Rendering
-- Display: `{font-size}px / {font-weight} / {color}`
-- Color format: hex (rgb → hex conversion)
+- Display: `{font-size}px / {font-weight} / {color} [■]`
+- Color format: hex (rgb → hex conversion) + 색상 미리보기 박스
 - Position: Top-left of text element
 - Container: Independent root with high z-index
 

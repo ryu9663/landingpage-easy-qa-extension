@@ -58,7 +58,8 @@
 - [x] 배지 생성 함수 구현
   - [x] `font-size` 추출 (computed style)
   - [x] `font-weight` 추출 (computed style)
-  - [ ] `color` 추출 및 hex 변환 (computed style → hex)
+  - [x] `color` 추출 및 hex 변환 (computed style → hex)
+  - [x] `color` 미리보기 박스 표시 (hex 코드 옆에 해당 색상 박스)
   - [x] 배지 DOM 요소 생성 및 배치
 
 ### 2.4 자동 갱신 트리거
