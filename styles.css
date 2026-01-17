@@ -13,6 +13,9 @@
 
 .lfqa-badge {
   position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   background-color: #1a1a1a;
   color: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
@@ -26,4 +29,13 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   transform: translateY(-100%);
   margin-top: -2px;
+}
+
+.lfqa-color-box {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
 }

@@ -60,6 +60,27 @@
     return rect.width > 0 && rect.height > 0;
   }
 
+  // Convert rgb/rgba color to hex format
+  function rgbToHex(color) {
+    // Handle already hex format
+    if (color.startsWith('#')) {
+      return color.toUpperCase();
+    }
+
+    // Parse rgb/rgba
+    const match = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    if (!match) {
+      return color; // Return as-is if can't parse
+    }
+
+    const r = parseInt(match[1], 10);
+    const g = parseInt(match[2], 10);
+    const b = parseInt(match[3], 10);
+
+    const toHex = (n) => n.toString(16).padStart(2, '0').toUpperCase();
+    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+  }
+
   // Find all visible text elements
   function findTextElements() {
     const elements = [];
@@ -109,10 +130,22 @@
     const style = window.getComputedStyle(element);
     const fontSize = Math.round(parseFloat(style.fontSize));
     const fontWeight = style.fontWeight;
+    const color = rgbToHex(style.color);
 
     const badge = document.createElement('div');
     badge.className = 'lfqa-badge';
-    badge.textContent = `${fontSize}px / ${fontWeight}`;
+
+    // Create text content
+    const textSpan = document.createElement('span');
+    textSpan.textContent = `${fontSize}px / ${fontWeight} / ${color}`;
+
+    // Create color preview box
+    const colorBox = document.createElement('span');
+    colorBox.className = 'lfqa-color-box';
+    colorBox.style.backgroundColor = color;
+
+    badge.appendChild(textSpan);
+    badge.appendChild(colorBox);
 
     // Position at top-left of element
     badge.style.left = `${rect.left + window.scrollX}px`;
