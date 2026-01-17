@@ -21,6 +21,10 @@
   let resizeHandler = null;
   let mutationObserver = null;
   let debounceTimeoutId = null;
+  let elementBadgeMap = new Map(); // Maps text elements to their badges
+  let hoverCleanupFns = []; // Stores hover listener cleanup functions
+  let currentlyHoveredElement = null; // Track currently hovered element
+  let pendingRafId = null; // Track pending requestAnimationFrame
 
   // Debounce utility (uses module-level timeoutId for cleanup)
   function debounce(fn, delay) {
@@ -160,6 +164,38 @@
     return badge;
   }
 
+  // Setup hover listener for a text element to highlight its badge
+  function setupHoverListener(element, badge) {
+    const handleMouseEnter = () => {
+      currentlyHoveredElement = element;
+      badge.classList.add('lfqa-badge-highlight');
+    };
+
+    const handleMouseLeave = () => {
+      currentlyHoveredElement = null;
+      badge.classList.remove('lfqa-badge-highlight');
+    };
+
+    element.addEventListener('mouseenter', handleMouseEnter);
+    element.addEventListener('mouseleave', handleMouseLeave);
+
+    // Store cleanup function
+    hoverCleanupFns.push(() => {
+      element.removeEventListener('mouseenter', handleMouseEnter);
+      element.removeEventListener('mouseleave', handleMouseLeave);
+    });
+  }
+
+  // Cleanup all hover listeners
+  function cleanupHoverListeners() {
+    for (const cleanupFn of hoverCleanupFns) {
+      cleanupFn();
+    }
+    hoverCleanupFns = [];
+    elementBadgeMap.clear();
+    // Note: currentlyHoveredElement is preserved for re-render restoration
+  }
+
   // Create overlay container
   function createContainer() {
     const existing = document.getElementById(CONTAINER_ID);
@@ -179,19 +215,48 @@
       container = createContainer();
     }
 
+    // Cancel any pending RAF to prevent duplicate listener registration
+    if (pendingRafId) {
+      cancelAnimationFrame(pendingRafId);
+      pendingRafId = null;
+    }
+
+    // Save currently hovered element before cleanup
+    const previouslyHoveredElement = currentlyHoveredElement;
+
+    // Cleanup previous hover listeners before re-rendering
+    cleanupHoverListeners();
+
     // Clear existing badges
     container.innerHTML = '';
 
     // Find text elements and create badges
     const textElements = findTextElements();
 
-    requestAnimationFrame(() => {
+    pendingRafId = requestAnimationFrame(() => {
+      pendingRafId = null;
       const fragment = document.createDocumentFragment();
+      const elementsAndBadges = [];
+
       for (const { element, rect } of textElements) {
         const badge = createBadge(element, rect);
         fragment.appendChild(badge);
+        elementsAndBadges.push({ element, badge });
       }
+
       container.appendChild(fragment);
+
+      // Setup hover listeners after badges are in DOM
+      for (const { element, badge } of elementsAndBadges) {
+        elementBadgeMap.set(element, badge);
+        setupHoverListener(element, badge);
+
+        // Restore hover highlight if this element was being hovered
+        if (element === previouslyHoveredElement) {
+          currentlyHoveredElement = element;
+          badge.classList.add('lfqa-badge-highlight');
+        }
+      }
     });
   }
 
@@ -222,6 +287,12 @@
       debounceTimeoutId = null;
     }
 
+    // Cancel any pending RAF
+    if (pendingRafId) {
+      cancelAnimationFrame(pendingRafId);
+      pendingRafId = null;
+    }
+
     // Disconnect observer BEFORE removing container to prevent mutation events
     if (mutationObserver) {
       mutationObserver.disconnect();
@@ -237,6 +308,10 @@
       window.removeEventListener('resize', resizeHandler);
       resizeHandler = null;
     }
+
+    // Cleanup hover listeners and reset hover state
+    cleanupHoverListeners();
+    currentlyHoveredElement = null;
 
     // Remove container
     if (container) {

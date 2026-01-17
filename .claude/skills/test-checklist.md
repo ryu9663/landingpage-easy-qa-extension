@@ -25,8 +25,10 @@ Extension 기능 테스트용 QA 체크리스트
 ### 3. Badge Rendering Tests
 - [ ] Shows font-size in px
 - [ ] Shows font-weight correctly
+- [ ] Shows color in hex format with preview box
 - [ ] Badge positioned near text element
 - [ ] Badge doesn't block page interaction
+- [ ] **Hovering text element shows its badge on top (z-index)**
 
 ### 4. Auto-refresh Tests
 - [ ] Scroll triggers update (after 1000ms debounce)
@@ -41,7 +43,7 @@ Extension 기능 테스트용 QA 체크리스트
 ### 6. Cleanup Tests
 - [ ] OFF removes all overlay elements
 - [ ] No residual styles on page
-- [ ] Event listeners properly removed
+- [ ] Event listeners properly removed (scroll, resize, hover)
 - [ ] MutationObserver disconnected
 
 ## Test Sites
@@ -59,10 +61,10 @@ Test Results
 ============
 Toggle: 4/4 passed
 Detection: 6/6 passed
-Render: 4/4 passed
+Render: 6/6 passed
 Refresh: 3/3 passed
 Performance: 3/3 passed
 Cleanup: 4/4 passed
 
-Overall: 24/24 PASSED
+Overall: 26/26 PASSED
 ```
