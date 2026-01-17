@@ -1,6 +1,6 @@
 # Landing Font QA Extension
 
-Chrome Extension for QA teams to quickly verify font-size and font-weight on landing pages.
+Chrome Extension for QA teams to quickly verify font-size, font-weight, and color on landing pages.
 
 ## Project Overview
 
@@ -57,7 +57,8 @@ Chrome Extension for QA teams to quickly verify font-size and font-weight on lan
 - `pointer-events: none` on overlay
 
 ### Badge Rendering
-- Display: `{font-size}px / {font-weight}`
+- Display: `{font-size}px / {font-weight} / {color}`
+- Color format: hex (rgb → hex conversion)
 - Position: Top-left of text element
 - Container: Independent root with high z-index
 

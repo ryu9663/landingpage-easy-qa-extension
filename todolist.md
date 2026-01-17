@@ -58,6 +58,7 @@
 - [x] 배지 생성 함수 구현
   - [x] `font-size` 추출 (computed style)
   - [x] `font-weight` 추출 (computed style)
+  - [ ] `color` 추출 및 hex 변환 (computed style → hex)
   - [x] 배지 DOM 요소 생성 및 배치
 
 ### 2.4 자동 갱신 트리거
@@ -90,6 +91,7 @@
 ### 4.1 기능 테스트
 - [ ] 다양한 폰트 사이즈 (px/rem/em) 표시 확인
 - [ ] font-weight 400/500/600/700 등 정상 표시
+- [ ] color hex 형식 정상 표시 (rgb → hex 변환 확인)
 - [ ] 숨김 케이스 테스트
   - [ ] `display: none`
   - [ ] `visibility: hidden`
@@ -140,7 +142,7 @@
 ## 참고사항
 
 ### 제외 항목 (v0)
-- 색상/라인하이트/폰트패밀리 표기
+- 라인하이트/폰트패밀리 표기
 - 클릭/선택/인스펙터 모드
 - 리포트 저장/내보내기
 - 페이지별 룰/프리셋 관리
