@@ -4,6 +4,12 @@
 (function() {
   'use strict';
 
+  // Prevent duplicate execution
+  if (window.__LFQA_INITIALIZED__) {
+    return;
+  }
+  window.__LFQA_INITIALIZED__ = true;
+
   // Constants
   const MAX_BADGES = 800;
   const DEBOUNCE_DELAY = 1000;
@@ -14,13 +20,13 @@
   let scrollHandler = null;
   let resizeHandler = null;
   let mutationObserver = null;
+  let debounceTimeoutId = null;
 
-  // Debounce utility
+  // Debounce utility (uses module-level timeoutId for cleanup)
   function debounce(fn, delay) {
-    let timeoutId = null;
     return function(...args) {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => fn.apply(this, args), delay);
+      clearTimeout(debounceTimeoutId);
+      debounceTimeoutId = setTimeout(() => fn.apply(this, args), delay);
     };
   }
 
@@ -210,10 +216,16 @@
 
   // Cleanup function
   function cleanup() {
-    // Remove container
-    if (container) {
-      container.remove();
-      container = null;
+    // Cancel any pending debounced render calls FIRST
+    if (debounceTimeoutId) {
+      clearTimeout(debounceTimeoutId);
+      debounceTimeoutId = null;
+    }
+
+    // Disconnect observer BEFORE removing container to prevent mutation events
+    if (mutationObserver) {
+      mutationObserver.disconnect();
+      mutationObserver = null;
     }
 
     // Remove event listeners
@@ -226,11 +238,14 @@
       resizeHandler = null;
     }
 
-    // Disconnect observer
-    if (mutationObserver) {
-      mutationObserver.disconnect();
-      mutationObserver = null;
+    // Remove container
+    if (container) {
+      container.remove();
+      container = null;
     }
+
+    // Reset initialization flag to allow re-initialization
+    window.__LFQA_INITIALIZED__ = false;
   }
 
   // Listen for cleanup message from background
