@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Font QA Extension - Test Page</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 20px; }
+
+    .section { margin-bottom: 40px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+    .section-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
+    .test-item { margin: 15px 0; padding: 10px; background: #f9f9f9; border-radius: 4px; }
+    .test-label { font-size: 12px; color: #666; margin-bottom: 5px; }
+
+    /* Fixed Header */
+    .fixed-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #007bff;
+      color: white;
+      padding: 15px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      z-index: 1000;
+    }
+
+    /* Sticky Header */
+    .sticky-section {
+      position: sticky;
+      top: 60px;
+      background: #28a745;
+      color: white;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      z-index: 100;
+    }
+
+    body { padding-top: 70px; }
+  </style>
+</head>
+<body>
+
+  <!-- Fixed Header Test -->
+  <div class="fixed-header">Fixed Header - 16px / 600</div>
+
+  <!-- Section 1: Font Sizes -->
+  <div class="section">
+    <div class="section-title">1. Font Size Tests (px/rem/em)</div>
+
+    <div class="test-item">
+      <div class="test-label">12px</div>
+      <div style="font-size: 12px;">The quick brown fox - 12px</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">14px</div>
+      <div style="font-size: 14px;">The quick brown fox - 14px</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">16px (1rem)</div>
+      <div style="font-size: 1rem;">The quick brown fox - 1rem (16px)</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">20px (1.25rem)</div>
+      <div style="font-size: 1.25rem;">The quick brown fox - 1.25rem (20px)</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">24px (1.5rem)</div>
+      <div style="font-size: 1.5rem;">The quick brown fox - 1.5rem (24px)</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">32px (2rem)</div>
+      <div style="font-size: 2rem;">The quick brown fox - 2rem (32px)</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">48px (3rem)</div>
+      <div style="font-size: 3rem;">Large Heading - 3rem (48px)</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">1.2em (relative to parent 16px = 19.2px)</div>
+      <div style="font-size: 16px;">
+        <span style="font-size: 1.2em;">Text with 1.2em</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Font Weights -->
+  <div class="section">
+    <div class="section-title">2. Font Weight Tests</div>
+
+    <div class="test-item">
+      <div class="test-label">font-weight: 100 (Thin)</div>
+      <div style="font-size: 18px; font-weight: 100;">Thin text - 100</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">font-weight: 300 (Light)</div>
+      <div style="font-size: 18px; font-weight: 300;">Light text - 300</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">font-weight: 400 (Normal)</div>
+      <div style="font-size: 18px; font-weight: 400;">Normal text - 400</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">font-weight: 500 (Medium)</div>
+      <div style="font-size: 18px; font-weight: 500;">Medium text - 500</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">font-weight: 600 (Semi-bold)</div>
+      <div style="font-size: 18px; font-weight: 600;">Semi-bold text - 600</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">font-weight: 700 (Bold)</div>
+      <div style="font-size: 18px; font-weight: 700;">Bold text - 700</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">font-weight: 800 (Extra-bold)</div>
+      <div style="font-size: 18px; font-weight: 800;">Extra-bold text - 800</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">font-weight: 900 (Black)</div>
+      <div style="font-size: 18px; font-weight: 900;">Black text - 900</div>
+    </div>
+  </div>
+
+  <!-- Section 3: Hidden Elements (Should NOT show badges) -->
+  <div class="section">
+    <div class="section-title">3. Hidden Elements Tests (Badges should NOT appear)</div>
+
+    <div class="test-item">
+      <div class="test-label">display: none</div>
+      <div style="display: none; font-size: 16px;">This text is display:none - NO BADGE</div>
+      <div style="font-size: 12px; color: #999;">(Hidden element above - no badge expected)</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">visibility: hidden</div>
+      <div style="visibility: hidden; font-size: 16px;">This text is visibility:hidden - NO BADGE</div>
+      <div style="font-size: 12px; color: #999;">(Hidden element above - no badge expected)</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">opacity: 0</div>
+      <div style="opacity: 0; font-size: 16px;">This text is opacity:0 - NO BADGE</div>
+      <div style="font-size: 12px; color: #999;">(Hidden element above - no badge expected)</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">opacity: 0.01 (Should show badge - not exactly 0)</div>
+      <div style="opacity: 0.01; font-size: 16px;">This text is opacity:0.01 - BADGE SHOULD APPEAR</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">opacity: 0.5 (Should show badge)</div>
+      <div style="opacity: 0.5; font-size: 16px;">This text is opacity:0.5 - BADGE SHOULD APPEAR</div>
+    </div>
+  </div>
+
+  <!-- Section 4: Sticky Header -->
+  <div class="sticky-section">Sticky Section Header - 14px / 500</div>
+
+  <!-- Section 5: Nested Text (Deduplication test) -->
+  <div class="section">
+    <div class="section-title">4. Nested Text Tests (Deduplication)</div>
+
+    <div class="test-item">
+      <div class="test-label">Parent with text, child with text</div>
+      <div style="font-size: 16px;">
+        Parent text here
+        <span style="font-size: 14px; font-weight: 600;">Child span text</span>
+        more parent text
+      </div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">Multiple nested levels</div>
+      <div style="font-size: 18px;">
+        Level 1
+        <div style="font-size: 16px; margin-left: 20px;">
+          Level 2
+          <div style="font-size: 14px; margin-left: 20px;">
+            Level 3
+            <span style="font-size: 12px; font-weight: 700;">Level 4 span</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 6: Zero Size Elements (Should NOT show badges) -->
+  <div class="section">
+    <div class="section-title">5. Zero Size Elements Tests (No badges expected)</div>
+
+    <div class="test-item">
+      <div class="test-label">width: 0</div>
+      <div style="width: 0; overflow: hidden; font-size: 16px;">Zero width text</div>
+      <div style="font-size: 12px; color: #999;">(Zero width element - no badge expected)</div>
+    </div>
+
+    <div class="test-item">
+      <div class="test-label">height: 0</div>
+      <div style="height: 0; overflow: hidden; font-size: 16px;">Zero height text</div>
+      <div style="font-size: 12px; color: #999;">(Zero height element - no badge expected)</div>
+    </div>
+  </div>
+
+  <!-- Section 7: iframe Tests -->
+  <div class="section">
+    <div class="section-title">6. iframe Tests</div>
+
+    <div class="test-item">
+      <div class="test-label">Cross-origin iframe (Should NOT show badges inside)</div>
+      <iframe src="https://example.com" width="300" height="100" style="border: 1px solid #ccc;"></iframe>
+      <div style="font-size: 12px; color: #999;">Cross-origin iframe - badges should not appear inside</div>
+    </div>
+  </div>
+
+  <!-- Section 8: Long Scroll Content -->
+  <div class="section">
+    <div class="section-title">7. Scroll Test - Long Content</div>
+    <p style="font-size: 14px; margin-bottom: 10px;">Scroll down to see more text elements. Badges should update after scrolling (1s debounce).</p>
+
+    <div style="height: 500px; background: linear-gradient(to bottom, #f0f0f0, #e0e0e0); padding: 20px;">
+      <div style="font-size: 16px; margin-bottom: 20px;">Top of scroll area - 16px</div>
+      <div style="font-size: 14px; margin-bottom: 400px;">Middle content - 14px</div>
+      <div style="font-size: 18px; font-weight: 600;">Bottom of scroll area - 18px / 600</div>
+    </div>
+  </div>
+
+  <!-- Section 9: Performance Test -->
+  <div class="section">
+    <div class="section-title">8. Performance Test - Many Elements</div>
+    <p style="font-size: 14px; margin-bottom: 10px;">Multiple text elements to test performance (max 800 badges limit).</p>
+
+    <div id="performance-test" style="display: flex; flex-wrap: wrap; gap: 5px;">
+    </div>
+  </div>
+
+  <script>
+    // Generate many text elements for performance test
+    const container = document.getElementById('performance-test');
+    for (let i = 0; i < 100; i++) {
+      const el = document.createElement('span');
+      el.style.fontSize = (10 + (i % 10)) + 'px';
+      el.style.fontWeight = (400 + (i % 5) * 100);
+      el.textContent = `Item ${i + 1}`;
+      el.style.padding = '2px 4px';
+      el.style.background = '#f0f0f0';
+      el.style.borderRadius = '2px';
+      container.appendChild(el);
+    }
+  </script>
+
+  <!-- Footer -->
+  <div style="margin-top: 40px; padding: 20px; background: #333; color: white; text-align: center;">
+    <div style="font-size: 14px; font-weight: 400;">Footer - 14px / 400</div>
+    <div style="font-size: 12px; font-weight: 300; margin-top: 10px;">Copyright 2024 - 12px / 300</div>
+  </div>
+
+  <!-- Extra scroll space -->
+  <div style="height: 200px;"></div>
+
+</body>
+</html>

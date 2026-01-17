@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+.DS_Store?
+._*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node (future use)
+node_modules/
+
+# Logs
+*.log
