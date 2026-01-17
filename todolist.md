@@ -3,10 +3,10 @@
 > **Note**: 이 파일은 **개발 작업 순서**를 정의합니다.
 > 요구사항 충족 상태 추적은 `.claude/requirements-matrix.md`를 참조하세요.
 
-## Phase 1: 초기 세팅
+## Phase 1: 초기 세팅 ✅
 
 ### 프로젝트 구조 설정
-- [ ] 프로젝트 폴더 구조 생성
+- [x] 프로젝트 폴더 구조 생성
   ```
   /
   ├── manifest.json
@@ -18,70 +18,70 @@
       ├── icon48.png
       └── icon128.png
   ```
-- [ ] `manifest.json` 작성 (MV3 기반)
+- [x] `manifest.json` 작성 (MV3 기반)
   - permissions: `activeTab`, `scripting`
   - action 설정 (아이콘 클릭 핸들링)
-- [ ] 아이콘 파일 준비 (16x16, 48x48, 128x128)
+- [x] 아이콘 파일 준비 (16x16, 48x48, 128x128)
 
 ---
 
-## Phase 2: 핵심 기능 구현
+## Phase 2: 핵심 기능 구현 ✅
 
 ### 2.1 토글 기능
-- [ ] Background Service Worker 구현
-  - [ ] 확장 아이콘 클릭 이벤트 리스닝
-  - [ ] 탭별 ON/OFF 상태 관리
-  - [ ] Content Script 주입/제거 로직
+- [x] Background Service Worker 구현
+  - [x] 확장 아이콘 클릭 이벤트 리스닝
+  - [x] 탭별 ON/OFF 상태 관리
+  - [x] Content Script 주입/제거 로직
 - [ ] ON/OFF 상태에 따른 아이콘 변경 (선택)
 
 ### 2.2 텍스트 요소 탐지 로직
-- [ ] "보이는 텍스트" 판정 함수 구현
-  - [ ] A. 뷰포트 교차 검사 (`getBoundingClientRect`)
-  - [ ] B. 실제 텍스트 존재 검사 (공백 제거 후 1자 이상)
-  - [ ] C. 숨김 요소 제외 검사
-    - [ ] `display: none` 체크
-    - [ ] `visibility: hidden` 체크
-    - [ ] `opacity: 0` 체크
-- [ ] 텍스트 노드 순회 로직 구현
-  - [ ] TreeWalker를 이용한 텍스트 노드 탐색
-  - [ ] 부모 요소 기준 중복 제거 (Set 사용)
-- [ ] 매우 작은 요소 (0 크기 rect) 제외 처리
+- [x] "보이는 텍스트" 판정 함수 구현
+  - [x] A. 뷰포트 교차 검사 (`getBoundingClientRect`)
+  - [x] B. 실제 텍스트 존재 검사 (공백 제거 후 1자 이상)
+  - [x] C. 숨김 요소 제외 검사
+    - [x] `display: none` 체크
+    - [x] `visibility: hidden` 체크
+    - [x] `opacity: 0` 체크
+- [x] 텍스트 노드 순회 로직 구현
+  - [x] TreeWalker를 이용한 텍스트 노드 탐색
+  - [x] 부모 요소 기준 중복 제거 (Set 사용)
+- [x] 매우 작은 요소 (0 크기 rect) 제외 처리
 
 ### 2.3 배지(말풍선) 렌더링
-- [ ] 오버레이 컨테이너 생성
-  - [ ] 독립 root 컨테이너 (DOM 영향 차단)
-  - [ ] 높은 z-index 설정
-  - [ ] `pointer-events: none` 적용
-- [ ] 배지 스타일 정의 (`styles.css`)
-  - [ ] 말풍선 디자인 (배경, 테두리, 폰트)
-  - [ ] 위치 계산 (텍스트 요소 좌상단 근처)
-- [ ] 배지 생성 함수 구현
-  - [ ] `font-size` 추출 (computed style)
-  - [ ] `font-weight` 추출 (computed style)
-  - [ ] 배지 DOM 요소 생성 및 배치
+- [x] 오버레이 컨테이너 생성
+  - [x] 독립 root 컨테이너 (DOM 영향 차단)
+  - [x] 높은 z-index 설정
+  - [x] `pointer-events: none` 적용
+- [x] 배지 스타일 정의 (`styles.css`)
+  - [x] 말풍선 디자인 (배경, 테두리, 폰트)
+  - [x] 위치 계산 (텍스트 요소 좌상단 근처)
+- [x] 배지 생성 함수 구현
+  - [x] `font-size` 추출 (computed style)
+  - [x] `font-weight` 추출 (computed style)
+  - [x] 배지 DOM 요소 생성 및 배치
 
 ### 2.4 자동 갱신 트리거
-- [ ] 디바운스 유틸 함수 구현 (1000ms)
-- [ ] `scroll` 이벤트 리스너 등록 (디바운싱 적용)
-- [ ] `resize` 이벤트 리스너 등록 (디바운싱 적용)
-- [ ] MutationObserver 설정 (선택적)
-  - [ ] DOM 변경 감지 시 갱신 예약
-  - [ ] 동일하게 1000ms 디바운싱 적용
+- [x] 디바운스 유틸 함수 구현 (1000ms)
+- [x] `scroll` 이벤트 리스너 등록 (디바운싱 적용)
+- [x] `resize` 이벤트 리스너 등록 (디바운싱 적용)
+- [x] MutationObserver 설정 (선택적)
+  - [x] DOM 변경 감지 시 갱신 예약
+  - [x] 동일하게 1000ms 디바운싱 적용
 
 ### 2.5 성능 안전장치
-- [ ] 최대 배지 개수 상한 설정 (800개)
-- [ ] 상한 초과 시 추가 생성 중단 로직
-- [ ] `requestAnimationFrame` 기반 렌더링 제한
+- [x] 최대 배지 개수 상한 설정 (800개)
+- [x] 상한 초과 시 추가 생성 중단 로직
+- [x] `requestAnimationFrame` 기반 렌더링 제한
 
 ---
 
-## Phase 3: 정리 및 OFF 처리
+## Phase 3: 정리 및 OFF 처리 ✅
 
 ### 3.1 클린업 로직
-- [ ] OFF 시 오버레이 컨테이너 완전 제거
-- [ ] 이벤트 리스너 해제
-- [ ] MutationObserver disconnect
-- [ ] 페이지에 잔여 DOM/스타일 영향 없음 확인
+- [x] OFF 시 오버레이 컨테이너 완전 제거
+- [x] 이벤트 리스너 해제
+- [x] MutationObserver disconnect
+- [ ] 페이지에 잔여 DOM/스타일 영향 없음 확인 (테스트 필요)
 
 ---
 
